@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <title>REGISTRATION FORM</title>
+</head>
+
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h3>REGISTRATION FORM</h3>
+    </div>
+    <form>
+      <div class="mb-3 ">
+        <label class="form-label ">Username</label>
+        <div class="input-group rounded-2" id="csss">
+          <input type="text" class="form-control" id="username" placeholder="Enter your Fullname">
+          <div class="input-group-text input-group-text1"  id="icon"><i class="fa-solid fa-circle-check fa1"></i></div>
+          <div class="input-group-text" ><i class="fa-solid fa-circle-exclamation fa1 " id="exa"></i></div>
+        </div>
+        <span id="nameHelp" class="form-text"></span>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <div class="input-group rounded-2">
+          <input type="Email" class="form-control" id="email" placeholder="Enter your Email">
+          <div class="input-group-text input-group-text1"  id="icon"><i class="fa-solid fa-circle-check fa1"></i></div>
+          <div class="input-group-text"><i class="fa-solid fa-circle-exclamation fa1 "></i></div>
+        </div>
+        <div id="emailHelp" class="form-text"></div>
+      </div> 
+       <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+        <div class="input-group rounded-2">
+          <input type="tel"  class="form-control" id="phone" placeholder="Enter your Phone Number">
+          <div class="input-group-text input-group-text1"><i class="fa-solid fa-circle-check fa1"></i></div>
+          <div class="input-group-text"><i class="fa-solid fa-circle-exclamation fa1 "></i></div>
+        </div>
+        <div id="phoneHelp" class="form-text"></div>
+      </div>
+       <div class="mb-3">
+        <label class="form-label">Password</label>
+        <div class="input-group rounded-2">
+          <input type="password"  class="form-control" id="pass" placeholder="Enter your Password">
+          <div class="input-group-text input-group-text1"><i class="fa-solid fa-circle-check fa1"></i></div>
+          <div class="input-group-text"><i class="fa-solid fa-circle-exclamation fa1 "></i></div>
+        </div>
+        <div id="passwordHelp" class="form-text"></div>
+      </div> 
+      <div class="mb-3">
+        <label class="form-label">Conform Password</label>
+        <div class="input-group rounded-3">
+          <input type="password" + class="form-control" id="cpass"
+            placeholder="Enter your Conform password">
+          <div class="input-group-text input-group-text1"><i class="fa-solid fa-circle-check fa1"></i></div>
+          <div class="input-group-text"><i class="fa-solid fa-circle-exclamation fa1 "></i></div>
+        </div>
+        <div id="cpasswordHelp" class="form-text"></div>
+      </div> 
+      <button type="button" onclick="save()"  class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <script type="text/javascript">
+    let username = document.getElementById('username');
+    let email = document.getElementById('email');
+    let Phone = document.getElementById('phone');
+    let password = document.getElementById('pass');
+    let Conformpassword = document.getElementById('cpass');
+    val = 1;
+
+    let  save =() => {
+      
+      if (username.value.trim() == '') {
+        setError(username, document.getElementById('nameHelp').innerHTML = "Name can't be empty..");
+        val = 0;
+      }
+      else if (username.value.trim().length < 5) {
+        setError(username, document.getElementById('nameHelp').innerHTML = "Username must be between 3 and 15 character"); 
+        val = 0;
+      }
+      else if(!validateLowercase(username.value)){
+        setError(username, document.getElementById('nameHelp').innerHTML = "Username is a not valid!"); 
+        val = 0;
+      }
+      else {
+        showSuccess(username ,document.getElementById('nameHelp').innerHTML = '');
+        console.log( "Enter your Fullname : -" +username.value);
+        document.getElementById('username').value = '';
+      }
+
+      if (email.value.trim() == '') {
+        setError(email, document.getElementById('emailHelp').innerHTML = "Email cant't be blank");
+      }
+      else if (emailval(email.value)) {
+        showSuccess(email, document.getElementById('emailHelp').innerHTML="");
+        console.log( "Enter your Email: -" +email.value);
+        document.getElementById('email').value = '';
+      }
+      else {
+        setError(email, document.getElementById('emailHelp').innerHTML = "Email is not valid.");
+      }
+      if (Phone.value.trim() == '') {
+        setError(Phone, document.getElementById('phoneHelp').innerHTML = "Phone number can't be not enter");
+      }
+      else if(phoneval(Phone.value)){
+        showSuccess(Phone , document.getElementById('phoneHelp').innerHTML="");
+        console.log( "Enter your Phone Number : -" +Phone.value);
+        document.getElementById('phone').value = ''
+      }
+      else {
+        setError(Phone, document.getElementById('phoneHelp').innerHTML = "Phone number is not valid !");
+      }
+      if (password.value.trim() == '') {
+        setError(password, document.getElementById('passwordHelp').innerHTML = "Password can't be enter..");
+      }
+      else if(passwords(password.value)){
+        showSuccess(password , document.getElementById('passwordHelp').innerHTML="");
+        console.log( "Enter your Phone Password : -" +password.value);
+        document.getElementById('pass').value = '';
+      }
+      else {
+        setError(password, document.getElementById('passwordHelp').innerHTML = "Password must has at least 8 characters that include at least 1 lowercase character, 1 uppercase characters, 1 number, and 1 special character in (!@#$%^&*)");
+        
+      }
+      if (Conformpassword.value.trim() == '') {
+        setError(Conformpassword, document.getElementById('cpasswordHelp').innerHTML = "password cant't be enter..");
+      }
+      else if(Conformpassword.value !== password.value){
+        setError(Conformpassword, document.getElementById('cpasswordHelp').innerHTML = "Do not match can't be password..");
+      }
+      else {
+        showSuccess(Conformpassword ,document.getElementById('cpasswordHelp').style.display="");
+        console.log( "Enter your Conformpassword  : -" +Conformpassword.value);
+        document.getElementById('cpass').innerHTML= '';
+
+      }    
+    if(val){
+   return true;
+    }
+    else{
+      return false;
+    }
+    }
+      const setError = (input, message) => {
+      const formField = input.parentElement;
+      formField.classList.remove('success');
+      formField.classList.add('error');
+      formField.classList.add('erre');
+    }
+    const showSuccess = (input) => {
+      const formField = input.parentElement;
+      const formFields = input.parentElement;
+      formField.classList.remove('error');
+      formField.classList.remove('erre');
+      formField.classList.add('success');
+    }
+    const emailval = (email) => {
+      const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return reg.test(email);
+    } 
+    const phoneval = (Phone) =>{
+      const phonnu = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+      return phonnu.test(Phone);
+    }
+    const passwords = (password) =>{
+      const re = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+      return re.test(password);
+    }
+const validateLowercase =(username)=> {
+  const regex = /^[a-z]+$/;
+  return regex.test(username);
+}
+
+      
+  </script>
+</body>
+
+</html>
